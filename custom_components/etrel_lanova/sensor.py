@@ -19,7 +19,6 @@ from homeassistant.const import (
     UnitOfEnergy,
     UnitOfFrequency,
     UnitOfPower,
-    UnitOfTime,
 )
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -185,14 +184,6 @@ SENSOR_DESCRIPTIONS: tuple[EtrelSensorDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         suggested_display_precision=0,
         value_fn=lambda s: s.ev_battery_pct,
-    ),
-    EtrelSensorDescription(
-        key="session_duration",
-        translation_key="session_duration",
-        native_unit_of_measurement=UnitOfTime.SECONDS,
-        device_class=SensorDeviceClass.DURATION,
-        state_class=SensorStateClass.MEASUREMENT,
-        value_fn=lambda s: s.session_duration,
     ),
 )
 
