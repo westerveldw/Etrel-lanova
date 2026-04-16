@@ -18,6 +18,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     read_client = EtrelModbusClient(host=host, port=DEFAULT_PORT)
     write_client = EtrelModbusClient(host=host, port=DEFAULT_PORT_WRITE)
 
+    await read_client.connect()
+    await write_client.connect()
+
     coordinator = EtrelCoordinator(hass, entry, read_client, write_client)
     await coordinator.async_config_entry_first_refresh()
 
