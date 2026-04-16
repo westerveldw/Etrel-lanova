@@ -3,9 +3,9 @@
   "name": "Etrel Lanova",
   "version": "0.1.0",
   "config_flow": true,
-  "documentation": "https://github.com/richardgrootkarzijn/etrel-lanova-ha",
-  "issue_tracker": "https://github.com/richardgrootkarzijn/etrel-lanova-ha/issues",
+  "documentation": "https://github.com/westerveldw/Etrel-lanova",
+  "issue_tracker": "https://github.com/westerveldw/Etrel-lanova/issues",
   "requirements": ["pymodbus>=3.0.0"],
-  "codeowners": ["@richardgrootkarzijn"],
+  "codeowners": ["@westerveldw"],
   "iot_class": "local_polling"
 }
