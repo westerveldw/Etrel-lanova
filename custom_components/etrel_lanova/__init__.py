@@ -1,10 +1,10 @@
 """Etrel Lanova Home Assistant integration."""
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_HOST, CONF_PORT, Platform
+from homeassistant.const import CONF_HOST, Platform
 from homeassistant.core import HomeAssistant
 
-from .const import CONF_PORT_WRITE, DEFAULT_PORT_WRITE, DOMAIN
+from .const import DEFAULT_PORT, DEFAULT_PORT_WRITE, DOMAIN
 from .coordinator import EtrelCoordinator
 from .modbus_client import EtrelModbusClient
 
@@ -14,11 +14,9 @@ PLATFORMS = [Platform.SENSOR, Platform.NUMBER]
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration from a config entry."""
     host = entry.data[CONF_HOST]
-    port_read = entry.data[CONF_PORT]
-    port_write = entry.data.get(CONF_PORT_WRITE, DEFAULT_PORT_WRITE)
 
-    read_client = EtrelModbusClient(host=host, port=port_read)
-    write_client = EtrelModbusClient(host=host, port=port_write)
+    read_client = EtrelModbusClient(host=host, port=DEFAULT_PORT)
+    write_client = EtrelModbusClient(host=host, port=DEFAULT_PORT_WRITE)
 
     coordinator = EtrelCoordinator(hass, entry, read_client, write_client)
     await coordinator.async_config_entry_first_refresh()

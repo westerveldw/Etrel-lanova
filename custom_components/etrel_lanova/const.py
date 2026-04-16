@@ -8,4 +8,3 @@ DEFAULT_PORT = 502        # read: measurements, status, current, voltage
 DEFAULT_PORT_WRITE = 503  # write: cluster limits (LoadGuard)
 DEFAULT_SCAN_INTERVAL = 10  # seconds
 
-CONF_PORT_WRITE = "port_write"
