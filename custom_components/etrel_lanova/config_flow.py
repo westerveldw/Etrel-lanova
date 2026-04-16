@@ -28,9 +28,7 @@ class EtrelLanovaConfigFlow(ConfigFlow, domain=DOMAIN):
             await self.async_set_unique_id(host)
             self._abort_if_unique_id_configured()
 
-            can_connect = await self.hass.async_add_executor_job(
-                self._test_connection, host, DEFAULT_PORT
-            )
+            can_connect = await self._test_connection(host, DEFAULT_PORT)
             if can_connect:
                 return self.async_create_entry(
                     title=f"Etrel Lanova ({host})",
@@ -45,11 +43,10 @@ class EtrelLanovaConfigFlow(ConfigFlow, domain=DOMAIN):
         )
 
     @staticmethod
-    def _test_connection(host: str, port: int) -> bool:
-        """Try to establish a Modbus connection (blocking, runs in executor)."""
+    async def _test_connection(host: str, port: int) -> bool:
         client = EtrelModbusClient(host=host, port=port)
         try:
-            return client.connect()
+            return await client.connect()
         finally:
             client.disconnect()
 

@@ -31,6 +31,6 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unload_ok:
         coordinator: EtrelCoordinator = hass.data[DOMAIN].pop(entry.entry_id)
-        await hass.async_add_executor_job(coordinator.read_client.disconnect)
-        await hass.async_add_executor_job(coordinator.write_client.disconnect)
+        coordinator.read_client.disconnect()
+        coordinator.write_client.disconnect()
     return unload_ok

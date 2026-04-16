@@ -4,14 +4,12 @@
       "user": {
         "title": "Verbinding met Etrel Lanova",
         "data": {
-          "host": "IP-adres",
-          "port": "Modbus poort (lezen, standaard 502)",
-          "port_write": "Modbus poort (schrijven, standaard 503)"
+          "host": "IP-adres"
         }
       }
     },
     "error": {
-      "cannot_connect": "Verbinding mislukt. Controleer het IP-adres en de poort."
+      "cannot_connect": "Verbinding mislukt. Controleer het IP-adres."
     },
     "abort": {
       "already_configured": "Deze laadpaal is al geconfigureerd."
@@ -19,7 +17,19 @@
   },
   "entity": {
     "sensor": {
-      "status":          { "name": "Status" },
+      "status": {
+        "name": "Status",
+        "state": {
+          "available":      "Beschikbaar",
+          "preparing":      "Aan het voorbereiden",
+          "charging":       "Aan het laden",
+          "suspended_evse": "Onderbroken (EVSE)",
+          "finishing":      "Afronden",
+          "suspended":      "Onderbroken",
+          "unavailable":    "Niet beschikbaar",
+          "reserved":       "Gereserveerd"
+        }
+      },
       "current_l1":      { "name": "Stroom L1" },
       "current_l2":      { "name": "Stroom L2" },
       "current_l3":      { "name": "Stroom L3" },
@@ -34,9 +44,8 @@
       "frequency":       { "name": "Frequentie" },
       "power_factor":    { "name": "Vermogensfactor" },
       "ev_max_current":  { "name": "EV max stroom" },
-      "cluster_limit_l1":  { "name": "Clusterlimiet L1 (lezen)" },
-      "ev_battery_pct":    { "name": "EV batterij" },
-      "session_duration":  { "name": "Sessieduur" }
+      "cluster_limit_l1": { "name": "Clusterlimiet L1 (lezen)" },
+      "ev_battery_pct":  { "name": "EV batterij" }
     },
     "number": {
       "cluster_limit": { "name": "Clusterlimiet" }

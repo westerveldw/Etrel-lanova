@@ -37,17 +37,12 @@ class EtrelCoordinator(DataUpdateCoordinator[ChargerState]):
         self.write_client = write_client
 
     async def _async_update_data(self) -> ChargerState:
-        # Read measurements from port 502
-        state = await self.hass.async_add_executor_job(self.read_client.read_all)
+        state = await self.read_client.read_all()
         if state is None:
             raise UpdateFailed("No Modbus connection to the charger (port 502)")
 
-        # Read cluster limits from port 503 (overwrite the port 502 values)
-        cl1 = await self.hass.async_add_executor_job(self.write_client.read_cluster_limit_l1)
-        cl2 = await self.hass.async_add_executor_job(self.write_client.read_cluster_limit_l2)
-        cl3 = await self.hass.async_add_executor_job(self.write_client.read_cluster_limit_l3)
-        state.cluster_limit_l1 = cl1
-        state.cluster_limit_l2 = cl2
-        state.cluster_limit_l3 = cl3
+        state.cluster_limit_l1 = await self.write_client._read_float_hr(2000)
+        state.cluster_limit_l2 = await self.write_client._read_float_hr(2002)
+        state.cluster_limit_l3 = await self.write_client._read_float_hr(2004)
 
         return state

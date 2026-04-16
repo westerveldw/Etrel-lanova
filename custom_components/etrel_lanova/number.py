@@ -64,7 +64,5 @@ class EtrelClusterLimit(CoordinatorEntity[EtrelCoordinator], NumberEntity):
         if 0 < value < 6:
             value = 6.0
 
-        await self.hass.async_add_executor_job(
-            self.coordinator.write_client.write_cluster_limit, value
-        )
+        await self.coordinator.write_client.write_cluster_limit(value)
         await self.coordinator.async_request_refresh()
