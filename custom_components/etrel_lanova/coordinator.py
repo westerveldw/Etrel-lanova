@@ -41,6 +41,7 @@ class EtrelCoordinator(DataUpdateCoordinator[ChargerState]):
         if state is None:
             raise UpdateFailed("No Modbus connection to the charger (port 502)")
 
+        await self.write_client.ensure_connected()
         state.cluster_limit_l1 = await self.write_client._read_float_hr(2000)
         state.cluster_limit_l2 = await self.write_client._read_float_hr(2002)
         state.cluster_limit_l3 = await self.write_client._read_float_hr(2004)
