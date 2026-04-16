@@ -1,34 +1,34 @@
 # Etrel Lanova - Home Assistant Integration
 
-Custom integration voor de Etrel Lanova laadpaal in Home Assistant, via Modbus TCP.
+Custom integration for the Etrel Lanova EV charger in Home Assistant, using Modbus TCP.
 
-## Functies
+## Features
 
-- Uitlezen van sensoren: status, stroom (L1/L2/L3), spanning, vermogen, energie, frequentie
-- Instellen van maximale laadstroom via de interface
-- Polling via Modbus TCP (poort 502 voor lezen, 503 voor schrijven)
+- Sensors: status, current (L1/L2/L3), voltage, power, energy, frequency
+- Set maximum charging current via the interface
+- Polling via Modbus TCP (port 502 for reading, port 503 for writing)
 
-## Installatie via HACS
+## Installation via HACS
 
-1. Ga in Home Assistant naar **HACS → Integraties**
-2. Klik op de drie puntjes rechtsboven en kies **Aangepaste opslagplaatsen**
-3. Voeg toe: `https://github.com/westerveldw/Etrel-lanova` als type **Integratie**
-4. Zoek naar **Etrel Lanova** en installeer
-5. Herstart Home Assistant
+1. Go to **HACS → Integrations** in Home Assistant
+2. Click the three dots in the top right and choose **Custom repositories**
+3. Add: `https://github.com/westerveldw/Etrel-lanova` as type **Integration**
+4. Search for **Etrel Lanova** and install
+5. Restart Home Assistant
 
-## Handmatige installatie
+## Manual installation
 
-1. Kopieer de map `custom_components/etrel_lanova/` naar de `custom_components/` map van jouw Home Assistant installatie
-2. Herstart Home Assistant
+1. Copy the `custom_components/etrel_lanova/` folder to the `custom_components/` directory of your Home Assistant installation
+2. Restart Home Assistant
 
-## Configuratie
+## Configuration
 
-1. Ga naar **Instellingen → Apparaten & Diensten → Integratie toevoegen**
-2. Zoek op **Etrel Lanova**
-3. Vul het IP-adres van de laadpaal in
+1. Go to **Settings → Devices & Services → Add integration**
+2. Search for **Etrel Lanova**
+3. Enter the IP address of your charger
 
-## Vereisten
+## Requirements
 
 - Home Assistant
-- Etrel Lanova laadpaal met Modbus TCP ingeschakeld
+- Etrel Lanova charger with Modbus TCP enabled
 - `pymodbus >= 3.0.0`
