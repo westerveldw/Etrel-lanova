@@ -1,0 +1,11 @@
+{
+  "domain": "etrel_lanova",
+  "name": "Etrel Lanova",
+  "version": "0.1.0",
+  "config_flow": true,
+  "documentation": "https://github.com/richardgrootkarzijn/etrel-lanova-ha",
+  "issue_tracker": "https://github.com/richardgrootkarzijn/etrel-lanova-ha/issues",
+  "requirements": ["pymodbus>=3.0.0"],
+  "codeowners": ["@richardgrootkarzijn"],
+  "iot_class": "local_polling"
+}

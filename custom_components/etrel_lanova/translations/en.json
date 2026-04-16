@@ -1,0 +1,45 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Etrel Lanova",
+        "data": {
+          "host": "IP address",
+          "port": "Modbus port (read, default 502)",
+          "port_write": "Modbus port (write, default 503)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect. Check the IP address and port."
+    },
+    "abort": {
+      "already_configured": "This charger is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status":          { "name": "Status" },
+      "current_l1":      { "name": "Current L1" },
+      "current_l2":      { "name": "Current L2" },
+      "current_l3":      { "name": "Current L3" },
+      "voltage_l1":      { "name": "Voltage L1" },
+      "voltage_l2":      { "name": "Voltage L2" },
+      "voltage_l3":      { "name": "Voltage L3" },
+      "power_l1":        { "name": "Power L1" },
+      "power_l2":        { "name": "Power L2" },
+      "power_l3":        { "name": "Power L3" },
+      "power_total":     { "name": "Power total" },
+      "session_energy":  { "name": "Session energy" },
+      "frequency":       { "name": "Frequency" },
+      "power_factor":    { "name": "Power factor" },
+      "ev_max_current":  { "name": "EV max current" },
+      "cluster_limit_l1":  { "name": "Cluster limit L1 (read)" },
+      "ev_battery_pct":    { "name": "EV battery" },
+      "session_duration":  { "name": "Session duration" }
+    },
+    "number": {
+      "cluster_limit": { "name": "Cluster limit" }
+    }
+  }
+}
