@@ -8,7 +8,7 @@ from .const import DEFAULT_PORT, DEFAULT_PORT_WRITE, DOMAIN
 from .coordinator import EtrelCoordinator
 from .modbus_client import EtrelModbusClient
 
-PLATFORMS = [Platform.SENSOR, Platform.NUMBER]
+PLATFORMS = [Platform.SENSOR, Platform.NUMBER, Platform.BUTTON]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:

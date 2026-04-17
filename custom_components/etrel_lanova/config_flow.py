@@ -49,4 +49,3 @@ class EtrelLanovaConfigFlow(ConfigFlow, domain=DOMAIN):
             return await client.connect()
         finally:
             client.disconnect()
-

@@ -49,6 +49,9 @@
     },
     "number": {
       "cluster_limit": { "name": "Clusterlimiet" }
+    },
+    "button": {
+      "stop_charging": { "name": "Stop laden" }
     }
   }
 }

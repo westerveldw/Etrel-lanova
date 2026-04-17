@@ -13,9 +13,9 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN
 from .coordinator import EtrelCoordinator
 
-MIN_CURRENT = 0.0   # A  (0 = stop charging)
-MAX_CURRENT = 32.0  # A  (adjust to match your installation)
-STEP = 1.0          # A
+MIN_CURRENT = 6.0
+MAX_CURRENT = 32.0
+STEP = 1.0
 
 
 async def async_setup_entry(
@@ -56,13 +56,5 @@ class EtrelClusterLimit(CoordinatorEntity[EtrelCoordinator], NumberEntity):
         return self.coordinator.data.cluster_limit_l1
 
     async def async_set_native_value(self, value: float) -> None:
-        """Write the new limit to the charger and refresh the coordinator.
-
-        Valid values: 0 (stop charging) or 6–32 A.
-        Values between 0 and 6 are snapped up to 6.
-        """
-        if 0 < value < 6:
-            value = 6.0
-
         await self.coordinator.write_client.write_cluster_limit(value)
         await self.coordinator.async_request_refresh()

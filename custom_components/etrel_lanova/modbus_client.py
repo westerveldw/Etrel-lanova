@@ -45,31 +45,31 @@ DEFAULT_TIMEOUT = 3
 # ---------------------------------------------------------------------------
 
 # Input registers (read-only, FC4)
-REG_STATUS          = 0
-REG_EV_MAX_CURRENT  = 2
-REG_FREQUENCY       = 6
-REG_VOLTAGE_L1      = 8
-REG_VOLTAGE_L2      = 10
-REG_VOLTAGE_L3      = 12
-REG_CURRENT_L1      = 14
-REG_CURRENT_L2      = 16
-REG_CURRENT_L3      = 18
-REG_POWER_L1        = 20
-REG_POWER_L2        = 22
-REG_POWER_L3        = 24
-REG_POWER_FACTOR    = 28
-REG_SESSION_ENERGY  = 30
-REG_DEPARTURE_TIME  = 38
-REG_EV_BATTERY_PCT  = 46
-REG_FW_MAJOR        = 49
-REG_FW_MINOR        = 52
-REG_FW_PATCH        = 53
+REG_STATUS = 0
+REG_EV_MAX_CURRENT = 2
+REG_FREQUENCY = 6
+REG_VOLTAGE_L1 = 8
+REG_VOLTAGE_L2 = 10
+REG_VOLTAGE_L3 = 12
+REG_CURRENT_L1 = 14
+REG_CURRENT_L2 = 16
+REG_CURRENT_L3 = 18
+REG_POWER_L1 = 20
+REG_POWER_L2 = 22
+REG_POWER_L3 = 24
+REG_POWER_FACTOR = 28
+REG_SESSION_ENERGY = 30
+REG_DEPARTURE_TIME = 38
+REG_EV_BATTERY_PCT = 46
+REG_FW_MAJOR = 49
+REG_FW_MINOR = 52
+REG_FW_PATCH = 53
 
 # Holding registers (read/write, FC3/FC16)
-REG_TARGET_CURRENT      = 4
-REG_CLUSTER_LIMIT_L1    = 2000
-REG_CLUSTER_LIMIT_L2    = 2002
-REG_CLUSTER_LIMIT_L3    = 2004
+REG_TARGET_CURRENT = 4
+REG_CLUSTER_LIMIT_L1 = 2000
+REG_CLUSTER_LIMIT_L2 = 2002
+REG_CLUSTER_LIMIT_L3 = 2004
 
 # ---------------------------------------------------------------------------
 # Status descriptions
@@ -96,6 +96,7 @@ STATUS_MAP: dict[int, str] = {
 # Dataclass for a full charger reading
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ChargerState:
     status: int
@@ -121,9 +122,11 @@ class ChargerState:
     cluster_limit_l2: Optional[float]
     cluster_limit_l3: Optional[float]
 
+
 # ---------------------------------------------------------------------------
 # Client class
 # ---------------------------------------------------------------------------
+
 
 class EtrelModbusClient:
     """Async Modbus TCP client for the Etrel Lanova charger."""
@@ -177,7 +180,8 @@ class EtrelModbusClient:
         r = await self._client.read_input_registers(address=address, count=2)
         if r.isError():
             return None
-        return struct.unpack(">I", struct.pack(">HH", r.registers[0], r.registers[1]))[0]
+        raw = struct.pack(">HH", r.registers[0], r.registers[1])
+        return struct.unpack(">I", raw)[0]
 
     async def _read_float_hr(self, address: int) -> Optional[float]:
         r = await self._client.read_holding_registers(address=address, count=2)
@@ -207,7 +211,7 @@ class EtrelModbusClient:
     # ------------------------------------------------------------------
 
     async def read_all(self) -> Optional[ChargerState]:
-        """Read all registers and return a ChargerState, or None on connection failure."""
+        """Read all registers and return a ChargerState, or None on failure."""
         if not await self.ensure_connected():
             return None
 
@@ -220,7 +224,10 @@ class EtrelModbusClient:
         major = await self._read_uint16_ir(REG_FW_MAJOR)
         minor = await self._read_uint16_ir(REG_FW_MINOR)
         patch = await self._read_uint16_ir(REG_FW_PATCH)
-        firmware = f"{major}.{minor}.{patch}" if None not in (major, minor, patch) else None
+        if None not in (major, minor, patch):
+            firmware = f"{major}.{minor}.{patch}"
+        else:
+            firmware = None
 
         return ChargerState(
             status=status,
