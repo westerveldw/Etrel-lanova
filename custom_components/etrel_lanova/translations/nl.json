@@ -50,8 +50,8 @@
     "number": {
       "cluster_limit": { "name": "Clusterlimiet" }
     },
-    "button": {
-      "stop_charging": { "name": "Stop laden" }
+    "switch": {
+      "charging_enabled": { "name": "Laden ingeschakeld" }
     }
   }
 }
