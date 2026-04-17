@@ -26,6 +26,7 @@ class EtrelStopChargingButton(ButtonEntity):
 
     _attr_has_entity_name = True
     _attr_translation_key = "stop_charging"
+    _attr_icon = "mdi:pause"
 
     def __init__(self, coordinator: EtrelCoordinator) -> None:
         self._coordinator = coordinator
